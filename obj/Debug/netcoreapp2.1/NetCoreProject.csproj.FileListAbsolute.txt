@@ -1,0 +1,14 @@
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\bin\Debug\netcoreapp2.1\NetCoreProject.deps.json
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\bin\Debug\netcoreapp2.1\NetCoreProject.runtimeconfig.json
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\bin\Debug\netcoreapp2.1\NetCoreProject.runtimeconfig.dev.json
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\bin\Debug\netcoreapp2.1\NetCoreProject.dll
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\obj\Debug\netcoreapp2.1\NetCoreProject.csproj.CoreCompileInputs.cache
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\obj\Debug\netcoreapp2.1\NetCoreProject.RazorAssemblyInfo.cache
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\obj\Debug\netcoreapp2.1\NetCoreProject.RazorAssemblyInfo.cs
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\obj\Debug\netcoreapp2.1\NetCoreProject.AssemblyInfoInputs.cache
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\obj\Debug\netcoreapp2.1\NetCoreProject.AssemblyInfo.cs
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\obj\Debug\netcoreapp2.1\NetCoreProject.RazorTargetAssemblyInfo.cache
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\bin\Debug\netcoreapp2.1\NetCoreProject.pdb
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\obj\Debug\netcoreapp2.1\NetCoreProject.dll
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\obj\Debug\netcoreapp2.1\NetCoreProject.pdb
+C:\Users\TuanNguyen\source\repos\NetCoreProject\NetCoreProject\obj\Debug\netcoreapp2.1\NetCoreProject.csprojAssemblyReference.cache
