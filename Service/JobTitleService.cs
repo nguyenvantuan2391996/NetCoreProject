@@ -23,7 +23,7 @@ namespace NetCoreProject.Service
 
         public List<JobTitle> GetByCodes(List<string> jobTitleCodes)
         {
-            var query = Builders<JobTitle>.Filter.In(jobtitle => jobtitle.Id, jobTitleCodes);
+            var query = Builders<JobTitle>.Filter.In(jobtitle => jobtitle.JobTitleCode, jobTitleCodes);
 
             var listJob = _jobTitles.Find(query).ToList();
 
@@ -31,7 +31,7 @@ namespace NetCoreProject.Service
         }
 
         public JobTitle GetByOne(string jobTitleCode) =>
-            _jobTitles.Find<JobTitle>(jobtitle => jobtitle.Id == jobTitleCode).FirstOrDefault();
+            _jobTitles.Find<JobTitle>(jobtitle => jobtitle.JobTitleCode == jobTitleCode).FirstOrDefault();
 
         public JobTitle Create(JobTitle jobTitle)
         {

@@ -23,7 +23,7 @@ namespace NetCoreProject.Service
 
         public List<Department> GetByCodes(List<string> deptCodes)
         {
-            var query = Builders<Department>.Filter.In(department => department.Id, deptCodes);
+            var query = Builders<Department>.Filter.In(department => department.DepartmentCode, deptCodes);
 
             var listDepartment = _departments.Find(query).ToList();
 
@@ -31,8 +31,8 @@ namespace NetCoreProject.Service
         }
 
 
-        public Department GetByOne(string id) =>
-            _departments.Find<Department>(department => department.Id == id).FirstOrDefault();
+        public Department GetByOne(string deptCode) =>
+            _departments.Find<Department>(department => department.DepartmentCode == deptCode).FirstOrDefault();
 
         public Department Create(Department department)
         {

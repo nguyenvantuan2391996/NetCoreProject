@@ -28,6 +28,7 @@ namespace NetCoreProject
         {
             services.AddScoped<DepartmentService>();
             services.AddScoped<JobTitleService>();
+            services.AddScoped<EmployeeService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
