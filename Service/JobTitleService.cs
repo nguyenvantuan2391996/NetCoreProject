@@ -50,6 +50,6 @@ namespace NetCoreProject.Service
 
         // Method delete Jobtitle
         public void Delete(string jobTitleCode) =>
-            _jobTitles.DeleteOne(jobTitle => jobTitle.Id == jobTitleCode);
+            _jobTitles.DeleteOne(jobTitle => jobTitle.JobTitleCode == jobTitleCode);
     }
 }

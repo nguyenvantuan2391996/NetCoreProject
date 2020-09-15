@@ -49,7 +49,7 @@ namespace NetCoreProject.Service
             _departments.ReplaceOne(department => department.DepartmentCode == departmentUpdate.DepartmentCode, departmentUpdate);
 
         // Method delete department
-        public void Remove(string id) =>
-            _departments.DeleteOne(department => department.Id == id);
+        public void Remove(string deptCode) =>
+            _departments.DeleteOne(department => department.DepartmentCode == deptCode);
     }
 }

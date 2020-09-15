@@ -101,7 +101,7 @@ namespace NetCoreProject.Service
 
         // Method delete Employee
         public void Delete(string employeeCode) =>
-            _employees.DeleteOne(employee => employee.Id == employeeCode);
+            _employees.DeleteOne(employee => employee.EmployeeCode == employeeCode);
 
         // Method convert data object EmployeeView
         public List<EmployeeView> convertEmployeeView(List<BsonDocument> listEmployeeView)
