@@ -10,6 +10,7 @@ namespace NetCoreProject.Service
     {
         private readonly IMongoCollection<Department> _departments;
 
+        // Connect mongodb
         public DepartmentService(IConfiguration config)
         {
             var client = new MongoClient(config.GetConnectionString("MyDemo"));
@@ -18,9 +19,11 @@ namespace NetCoreProject.Service
             _departments = database.GetCollection<Department>("Department");
         }
 
+        // Method get all department
         public List<Department> GetAll() =>
             _departments.Find(department => true).ToList();
 
+        // Method get by list department code
         public List<Department> GetByCodes(List<string> deptCodes)
         {
             var query = Builders<Department>.Filter.In(department => department.DepartmentCode, deptCodes);
@@ -30,19 +33,22 @@ namespace NetCoreProject.Service
             return listDepartment;
         }
 
-
+        // Method get by department code
         public Department GetByOne(string deptCode) =>
             _departments.Find<Department>(department => department.DepartmentCode == deptCode).FirstOrDefault();
 
+        // Method create department
         public Department Create(Department department)
         {
             _departments.InsertOne(department);
             return department;
         }
 
-        public void Update(Department departmentIn) =>
-            _departments.ReplaceOne(department => department.Id == departmentIn.Id, departmentIn);
+        // Method update department
+        public void Update(Department departmentUpdate) =>
+            _departments.ReplaceOne(department => department.DepartmentCode == departmentUpdate.DepartmentCode, departmentUpdate);
 
+        // Method delete department
         public void Remove(string id) =>
             _departments.DeleteOne(department => department.Id == id);
     }

@@ -13,6 +13,7 @@ namespace NetCoreProject.Service
     {
         private readonly IMongoCollection<Employee> _employees;
 
+        // Connect mongodb
         public EmployeeService(IConfiguration config)
         {
             var client = new MongoClient(config.GetConnectionString("MyDemo"));
@@ -21,6 +22,7 @@ namespace NetCoreProject.Service
             _employees = database.GetCollection<Employee>("Employee");
         }
 
+        // Method get all EmployeeView Join [Employee] with [Department || JobTitle]
         public List<EmployeeView> GetAll()
         {
             var listEmployeeView = _employees.Aggregate()
@@ -33,6 +35,7 @@ namespace NetCoreProject.Service
             return this.convertEmployeeView(listEmployeeView);
         }
 
+        // Method get EmployeeView Join [Employee] with [Department || JobTitle] by list employee code
         public List<EmployeeView> GetByCodes(List<string> employeeCodes)
         {
             // Query filter
@@ -48,6 +51,7 @@ namespace NetCoreProject.Service
             return this.convertEmployeeView(listEmployeeView);
         }
 
+        // Method get EmployeeView Join [Employee] with [Department || JobTitle] by list department code
         public List<EmployeeView> GetByDepartmentCodes(List<string> departmentCodes)
         {
             // Query filter
@@ -63,6 +67,7 @@ namespace NetCoreProject.Service
             return this.convertEmployeeView(listEmployeeView);
         }
 
+        // Method get EmployeeView Join [Employee] with [Department || JobTitle] by list jobtitle code
         public List<EmployeeView> GetByJobTitleCodes(List<string> jobtitleCodes)
         {
             // Query filter
@@ -78,22 +83,27 @@ namespace NetCoreProject.Service
             return this.convertEmployeeView(listEmployeeView);
         }
 
+        // Method get Employee by employee code
         public Employee GetByOne(string employeeCode) =>
-            _employees.Find<Employee>(employee => employee.Id == employeeCode).FirstOrDefault();
+            _employees.Find<Employee>(employee => employee.EmployeeCode == employeeCode).FirstOrDefault();
 
 
+        // Method create Employee
         public Employee Create(Employee employee)
         {
             _employees.InsertOne(employee);
             return employee;
         }
 
+        // Method update Employee
         public void Update(Employee employeeUpdate) =>
             _employees.ReplaceOne(employee => employee.Id == employeeUpdate.Id, employeeUpdate);
 
+        // Method delete Employee
         public void Delete(string employeeCode) =>
             _employees.DeleteOne(employee => employee.Id == employeeCode);
 
+        // Method convert data object EmployeeView
         public List<EmployeeView> convertEmployeeView(List<BsonDocument> listEmployeeView)
         {
             // Convert data to return object EmployeeView

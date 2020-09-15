@@ -51,8 +51,8 @@ namespace NetCoreProject.Controllers
         [HttpPost]
         public ActionResult<List<EmployeeView>> Create([FromBody]Employee employee)
         {
-            // Validate objectid
-            if (Regex.IsMatch(employee.Id.ToString(), "^[0-9a-fA-F]{24}$"))
+            // Validate EmployeeCode
+            if (_employeeService.GetByOne(employee.EmployeeCode) == null)
             {
                 var empl = _employeeService.Create(employee);
 
@@ -65,32 +65,25 @@ namespace NetCoreProject.Controllers
             }
             else
             {
-                return BadRequest();
+                return BadRequest("Employee Code is existed");
             }
         }
 
         [HttpPut]
         public ActionResult Update(Employee employeeUpdate)
         {
-            // Validate objectid
-            if (Regex.IsMatch(employeeUpdate.Id.ToString(), "^[0-9a-fA-F]{24}$"))
+            // Check exist record
+            var empl = _employeeService.GetByOne(employeeUpdate.EmployeeCode);
+
+            if (empl == null)
             {
-                // Check exist record
-                var job = _employeeService.GetByOne(employeeUpdate.Id);
-
-                if (job == null)
-                {
-                    return BadRequest("JobTitle isn't existed");
-                }
-
-                _employeeService.Update(employeeUpdate);
-
-                return Ok(employeeUpdate.Id);
+                return BadRequest("Employee isn't existed");
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            employeeUpdate.Id = empl.Id;
+            _employeeService.Update(employeeUpdate);
+
+            return Ok(employeeUpdate.Id);
         }
 
         [HttpDelete]

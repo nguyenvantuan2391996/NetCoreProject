@@ -23,7 +23,7 @@ namespace NetCoreProject.Controllers
             _jobTitleService.GetAll();
 
         [HttpGet("getbycodes")]
-        public ActionResult<List<JobTitle>> GetByCodes ([FromBody]List<String> jobTitleCodes)
+        public ActionResult<List<JobTitle>> GetByCodes([FromBody]List<String> jobTitleCodes)
         {
             var listJob = _jobTitleService.GetByCodes(jobTitleCodes);
 
@@ -52,8 +52,8 @@ namespace NetCoreProject.Controllers
         [HttpPost]
         public ActionResult Create(JobTitle jobTitle)
         {
-            // Validate objectid
-            if (Regex.IsMatch(jobTitle.Id.ToString(), "^[0-9a-fA-F]{24}$"))
+            // Validate JobTitleCode
+            if (_jobTitleService.GetByOne(jobTitle.JobTitleCode) == null)
             {
                 var job = _jobTitleService.Create(jobTitle);
 
@@ -66,32 +66,25 @@ namespace NetCoreProject.Controllers
             }
             else
             {
-                return BadRequest();
+                return BadRequest("JobTitle Code is existed");
             }
         }
 
         [HttpPut]
         public ActionResult Update(JobTitle jobTitleUpdate)
         {
-            // Validate objectid
-            if (Regex.IsMatch(jobTitleUpdate.Id.ToString(), "^[0-9a-fA-F]{24}$"))
+            // Check exist record
+            var job = _jobTitleService.GetByOne(jobTitleUpdate.JobTitleCode);
+
+            if (job == null)
             {
-                // Check exist record
-                var job = _jobTitleService.GetByOne(jobTitleUpdate.Id);
-
-                if (job == null)
-                {
-                    return BadRequest("JobTitle isn't existed");
-                }
-
-                _jobTitleService.Update(jobTitleUpdate);
-
-                return Ok(jobTitleUpdate.Id);
+                return BadRequest("JobTitle isn't existed");
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            jobTitleUpdate.Id = job.Id;
+            _jobTitleService.Update(jobTitleUpdate);
+
+            return Ok(jobTitleUpdate.Id);
         }
 
         [HttpDelete]

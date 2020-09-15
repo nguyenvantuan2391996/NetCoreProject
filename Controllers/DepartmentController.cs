@@ -54,8 +54,8 @@ namespace NetCoreProject.Controllers
         [HttpPost]
         public ActionResult Create([FromBody]Department department)
         {
-            // Validate objectid
-            if (Regex.IsMatch(department.Id.ToString(), "^[0-9a-fA-F]{24}$"))
+            // Validate departmentCode
+            if (_departmentService.GetByOne(department.DepartmentCode) == null)
             {
                 var dept = _departmentService.Create(department);
 
@@ -68,32 +68,25 @@ namespace NetCoreProject.Controllers
             }
             else
             {
-                return BadRequest();
+                return BadRequest("Department Code is existed");
             }
         }
 
         [HttpPut]
         public ActionResult Update([FromBody]Department department)
         {
-            // Validate objectid
-            if (Regex.IsMatch(department.Id.ToString(), "^[0-9a-fA-F]{24}$"))
+            // Check exist record
+            var dept = _departmentService.GetByOne(department.DepartmentCode);
+
+            if (dept == null)
             {
-                // Check exist record
-                var dept = _departmentService.GetByOne(department.Id);
-
-                if (dept == null)
-                {
-                    return BadRequest("Department isn't existed");
-                }
-
-                _departmentService.Update(department);
-
-                return Ok(department.Id);
+                return BadRequest("Department isn't existed");
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            department.Id = dept.Id;
+            _departmentService.Update(department);
+
+            return Ok(department.Id);
         }
 
         [HttpDelete]
